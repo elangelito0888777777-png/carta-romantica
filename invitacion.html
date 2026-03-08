@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Invitación Especial</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300&display=swap" rel="stylesheet">
+
+<style>
+
+body{
+margin:0;
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+background:linear-gradient(135deg,#ff9a9e,#fad0c4);
+font-family:'Poppins',sans-serif;
+overflow:hidden;
+}
+
+#sobre{
+width:260px;
+height:180px;
+background:#e63946;
+border-radius:10px;
+display:flex;
+justify-content:center;
+align-items:center;
+color:white;
+font-size:22px;
+cursor:pointer;
+box-shadow:0 10px 20px rgba(0,0,0,0.3);
+}
+
+#carta{
+display:none;
+position:absolute;
+background:white;
+padding:35px;
+width:420px;
+border-radius:15px;
+box-shadow:0 10px 30px rgba(0,0,0,0.4);
+text-align:center;
+}
+
+h1{
+font-family:'Great Vibes',cursive;
+font-size:42px;
+color:#e63946;
+}
+
+#texto{
+font-size:16px;
+min-height:120px;
+}
+
+.fecha{
+margin-top:20px;
+font-weight:bold;
+}
+
+.boton{
+margin-top:15px;
+padding:10px 20px;
+background:#e63946;
+border:none;
+color:white;
+border-radius:8px;
+font-size:16px;
+cursor:pointer;
+}
+
+.corazon{
+position:fixed;
+color:red;
+animation:subir 4s linear infinite;
+}
+
+@keyframes subir{
+from{transform:translateY(0);opacity:1;}
+to{transform:translateY(-900px);opacity:0;}
+}
+
+iframe{
+margin-top:15px;
+border-radius:10px;
+}
+
+</style>
+</head>
+
+<body>
+
+<div id="sobre" onclick="abrirCarta()">
+Abrir carta 💌
+</div>
+
+<div id="carta">
+
+<h1>Invitación</h1>
+
+<p id="texto"></p>
+
+<p class="fecha">
+Fecha: 14/03/2026
+</p>
+
+<button class="boton" onclick="enviarWhatsApp()">
+Enviar por WhatsApp
+</button>
+
+<br>
+
+<!-- canción desde la mejor parte (1 minuto) -->
+<iframe width="300" height="170"
+src="https://www.youtube.com/embed/dT2owtxkU8k?start=60"
+allow="autoplay; encrypted-media"
+allowfullscreen>
+</iframe>
+
+</div>
+
+<script>
+
+const mensaje="Hola hermosa señorita,\n\nCordialmente usted ha sido invitada a compartir un momento íntimo con su pareja para disfrutar de la cercanía, el deseo y la conexión especial entre ambos.";
+
+let i=0;
+
+function escribir(){
+
+if(i < mensaje.length){
+
+document.getElementById("texto").innerHTML += mensaje.charAt(i);
+
+i++;
+
+setTimeout(escribir,40);
+
+}
+
+}
+
+function abrirCarta(){
+
+document.getElementById("sobre").style.display="none";
+document.getElementById("carta").style.display="block";
+
+escribir();
+
+setInterval(crearCorazon,300);
+
+}
+
+function crearCorazon(){
+
+const c=document.createElement("div");
+
+c.classList.add("corazon");
+
+c.innerHTML="❤";
+
+c.style.left=Math.random()*100+"vw";
+
+c.style.fontSize=(Math.random()*20+10)+"px";
+
+document.body.appendChild(c);
+
+setTimeout(()=>{c.remove();},4000);
+
+}
+
+function enviarWhatsApp(){
+
+const mensaje="Te tengo una invitación especial 💌";
+
+const url="https://wa.me/?text="+encodeURIComponent(mensaje);
+
+window.open(url,"_blank");
+
+}
+
+</script>
+
+</body>
+</html>
